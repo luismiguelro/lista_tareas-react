@@ -1,5 +1,5 @@
 import { useState } from "react"
-
+import Todo from "./todo"
 // definicion: Elemento padre
 export default function TodoApp(){
     //manejo del estado(hook: actualizar info de las variables, del estado de la app)
@@ -34,8 +34,20 @@ export default function TodoApp(){
 
         // insertar
        const temp = [...todos];
+
        //insertar al principio
        temp.unshift(newTodo);
+       setTodos(temp)
+       setTitle("")
+    }
+
+    // para actulizar
+    function handleUpdate(id,value){
+        //copia de los todos
+        const temp=[...todos];
+        const item = temp.find(item => item.id===id);
+        item.title = value;
+        setTodos(temp);
     }
     return ( 
     <div className="todoContainer">
@@ -47,9 +59,15 @@ export default function TodoApp(){
             value="Create to do"
             className="buttonCreate"
             />
-            {title}
-           
         </form>
+
+        <div className="todosContainer">
+            {
+                todos.map(item=>(
+                    <Todo key={item.id} item={item} onUpdate={handleUpdate} />
+                ))
+            }
+        </div>
     </div>
     );
 }
