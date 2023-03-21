@@ -49,6 +49,12 @@ export default function TodoApp(){
         item.title = value;
         setTodos(temp);
     }
+    // -- Btn eliminar
+    function handleDelete(id){
+        //copia del todo, menos del eliminado
+        const temp= todos.filter(item => item.id!==id);
+        setTodos(temp);
+    }
     return ( 
     <div className="todoContainer">
         <form className="todoCreateForm" onSubmit={handleSubmit}>
@@ -64,7 +70,7 @@ export default function TodoApp(){
         <div className="todosContainer">
             {
                 todos.map(item=>(
-                    <Todo key={item.id} item={item} onUpdate={handleUpdate} />
+                    <Todo key={item.id} item={item} onUpdate={handleUpdate} onDelete={handleDelete} />
                 ))
             }
         </div>

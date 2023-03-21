@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-export default function Todo({item,onUpdate}){
+export default function Todo({item,onUpdate,onDelete}){
     // modificar
     const [isEdit, setIsEdit] = useState(false);
 
-    
+    // --- Inicio Boton: editar
     function FormEdit(){
         const [newValue,setNewValue] = useState(item.title);
 
@@ -30,12 +30,13 @@ export default function Todo({item,onUpdate}){
         </form>
         );
     }
+    // Fin Boton: Editar
 
     function TodoElement(){{
         return (
         <div className="todoInfo">
             {item.title} <button onClick={()=>setIsEdit(true)}>Editar</button>
-            <button>Eliminar</button>
+            <button onClick={()=>onDelete(item.id)}>Eliminar</button>
         </div>
         );
     }
